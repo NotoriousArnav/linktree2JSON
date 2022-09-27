@@ -1,4 +1,4 @@
-#linktree2JSON
+# linktree2JSON
 A small Script that can Parse linktr.ee data into Usable JSON Format and can be also used as a Module for Other Projects.
 
 ## Installation
