@@ -3,7 +3,6 @@ import requests #pip3 install requests
 import bs4 #pip3 install bs4
 import json # builtins
 
-
 def grab_source(username):
     
     r = requests.get("https://linktr.ee/"+username)
@@ -28,7 +27,18 @@ def parse_html(source):
     return info
 
 if __name__ == "__main__":
-    username = input("Enter the Username (Linktree Username): ")
-    dt = grab_source(username)
+    import argparse
+    parser = argparse.ArgumentParser(
+            description="A Tool to Scrape Linktr.ee Profiles (Default Output Format: JSON)"
+            )
+    parser.add_argument(
+                "--username",
+                help="Username of the Linktr.ee Profile"
+            )
+    args = parser.parse_args()
+    if args.username is None:
+        print("No username Given")
+        exit()
+    dt = grab_source(args.username)
     data = parse_html(dt)
     print(data)
