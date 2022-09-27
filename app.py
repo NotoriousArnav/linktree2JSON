@@ -3,9 +3,12 @@ import requests #pip3 install requests
 import bs4 #pip3 install bs4
 import json # builtins
 
-def grab_source(username):
-    
-    r = requests.get("https://linktr.ee/"+username)
+def grab_source(username, headers=None):
+    if headers:
+        r = requests.get("https://linktr.ee/"+username, headers=headers)
+    else:
+        r = requests.get("https://linktr.ee/"+username)
+        
     return r.text
 
 def parse_html(source):
@@ -35,10 +38,26 @@ if __name__ == "__main__":
                 "--username",
                 help="Username of the Linktr.ee Profile"
             )
+    parser.add_argument(
+                "--headersFile",
+                help="Provide Headers.json file containing headers that you want to Specify",
+                type=argparse.FileType('r')
+            )
+    parser.add_argument(
+                "--outfile",
+                help="Write to Desired Outfile.json (Default: stdout)",
+                type=argparse.FileType("w")
+            )
     args = parser.parse_args()
     if args.username is None:
         print("No username Given")
         exit()
-    dt = grab_source(args.username)
+    if args.headersFile:
+        dt = grab_source(args.username, headers=json.load(args.headersFile))
+    else:
+        dt = grab_source(args.username)
     data = parse_html(dt)
-    print(data)
+    if args.outfile:
+        json.dump(data, args.outfile)
+        exit()
+    print(json.dumps(data))
