@@ -37,3 +37,24 @@ To advoid Bot Detection, you can use Custom Headers that are saved in headers.js
 For Example Refer the headers.json file Provided
 4. --outfile
 To Save the Output result to a File. If not then It will print to stdout in JSON format so that other programs can Utilize it.
+
+#### Example Usage:
+```bash
+python3 app.py --username riyagogoi
+{
+	"username": "riyagogoi", 
+	"description": null, 
+	"profilePictureUrl": "https://d1fdloi71mui9q.cloudfront.net/iSM4QpzHTTyVp7uKOPsI_k8z7Mi5jEBQ278y3", 
+	"links": [
+		{
+			"Youtube": "https://www.youtube.com/c/RIYAGOGOI"
+		}, 
+		{
+			"Twitter": "https://twitter.com/_riyagogoi_"
+		}, 
+		{
+			"Instagram": "https://www.instagram.com/_riyagogoi_/"
+		}
+	]
+}
+```
