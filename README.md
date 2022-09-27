@@ -63,3 +63,24 @@ python3 app.py --username riyagogoi
 ```bash
 python3 app.py --username riyagogoi --outfile riyagogoi.json
 ```
+3. Using a Custom Headers File
+```bash
+python3 app.py --username riyagogoi --headersFile headers.json # You can also add this --outfile riyagogoi.json
+{
+  "username": "riyagogoi",
+  "description": null,
+  "profilePictureUrl": "https://d1fdloi71mui9q.cloudfront.net/iSM4QpzHTTyVp7uKOPsI_k8z7Mi5jEBQ278y3",
+  "links": [
+    {
+      "Youtube": "https://www.youtube.com/c/RIYAGOGOI"
+    },
+    {
+      "Twitter": "https://twitter.com/_riyagogoi_"
+    },
+    {
+      "Instagram": "https://www.instagram.com/_riyagogoi_/"
+    }
+  ]
+}
+
+```
