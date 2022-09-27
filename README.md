@@ -39,6 +39,7 @@ For Example Refer the headers.json file Provided
 To Save the Output result to a File. If not then It will print to stdout in JSON format so that other programs can Utilize it.
 
 #### Example Usage:
+1. Without Saving the Output
 ```bash
 python3 app.py --username riyagogoi
 {
@@ -57,4 +58,8 @@ python3 app.py --username riyagogoi
 		}
 	]
 }
+```
+2. With Saving the Output
+```bash
+python3 app.py --username riyagogoi --outfile riyagogoi.json
 ```
