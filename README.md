@@ -26,3 +26,14 @@ options:
                         want to Specify
   --outfile OUTFILE     Write to Desired Outfile.json (Default: stdout)
 ```
+
+### Options that can be Utilized:
+1. --help
+This is Pretty Self-Explanatory, that it prints the help info.
+2. --username
+This is Required, obviously, to Parse the profile page of a User
+3. --headersFile
+To advoid Bot Detection, you can use Custom Headers that are saved in headers.json or any JSON file.
+For Example Refer the headers.json file Provided
+4. --outfile
+To Save the Output result to a File. If not then It will print to stdout in JSON format so that other programs can Utilize it.
