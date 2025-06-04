@@ -90,3 +90,74 @@ If `--outfile` is not specified, the output will be printed to standard output:
   ]
 }
 ```
+
+## Using as a Module
+
+You can also use `linktree2JSON` as a module in your own Python projects to fetch and parse Linktree profile data.
+The primary functions you would use are `grab_source` and `parse_html` from `app.py`.
+
+1.  **`grab_source(username, headers=None)`**:
+    *   Fetches the HTML source code of the Linktree profile page.
+    *   `username` (str): The Linktree username.
+    *   `headers` (dict, optional): A dictionary of HTTP headers to use for the request.
+    *   Returns the HTML source code as a string.
+    *   Exits the script with an error message if the HTTP request fails (e.g., profile not found, network issues).
+
+2.  **`parse_html(source)`**:
+    *   Parses the HTML source code to extract profile information.
+    *   `source` (str): The HTML source code obtained from `grab_source`.
+    *   Returns a dictionary containing the profile information (username, description, profile picture URL, and links).
+    *   Exits the script with an error message if parsing fails (e.g., `__NEXT_DATA__` not found, unexpected JSON structure).
+
+### Example:
+
+Here's how you can use these functions in your script:
+
+```python
+from app import grab_source, parse_html
+import json # For pretty printing
+import sys # For stderr
+
+# Replace 'USERNAME' with the actual Linktree username
+linktree_username = "riyagogoi"
+
+# Optional: Define custom headers if needed
+# my_headers = {
+#     "User-Agent": "MyCoolBot/1.0",
+#     "Accept-Language": "en-US,en;q=0.5"
+# }
+# html_source = grab_source(linktree_username, headers=my_headers)
+
+# Fetch the HTML source (without custom headers in this example)
+try:
+    html_source = grab_source(linktree_username)
+
+    # Parse the HTML
+    # Note: grab_source and parse_html will call sys.exit() on error.
+    # If you want to handle errors differently, you'll need to modify them
+    # or wrap calls in a way that can catch SystemExit or convert them to exceptions.
+    profile_data = parse_html(html_source)
+
+    # Print some of the retrieved data
+    print(f"Username: {profile_data.get('username')}")
+    print(f"Description: {profile_data.get('description')}")
+    print(f"Profile Picture URL: {profile_data.get('profilePictureUrl')}")
+
+    print("\nLinks:")
+    if profile_data.get('links'):
+        for link_dict in profile_data['links']:
+            for title, url in link_dict.items():
+                print(f"- {title}: {url}")
+    else:
+        print("No links found.")
+
+    # Or print the whole data structure
+    # print("\nFull data:")
+    # print(json.dumps(profile_data, indent=2))
+
+except SystemExit as e:
+    # The grab_source and parse_html functions call sys.exit() on error.
+    # This block will catch such exits if they occur.
+    print(f"Script exited with error code: {e.code}", file=sys.stderr)
+
+```
