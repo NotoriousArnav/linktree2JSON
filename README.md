@@ -2,7 +2,7 @@
 A small Script that can Parse linktr.ee data into Usable JSON Format and can be also used as a Module for Other Projects.
 
 ## Installation
-To Install this Script:
+To Install this Script and its dependencies (including `lxml` for parsing):
 ```bash
 git clone https://github.com/NotoriousArnav/linktree2JSON.git
 cd linktree2JSON
@@ -12,7 +12,7 @@ pip3 install -r requirements.txt
 ## Usage
 The Usage of this Script is Pretty Straight Forward.
 ```bash
-python3 app.py --help #or ./app.py
+python3 app.py --help # or ./app.py
 usage: app.py [-h] [--username USERNAME] [--headersFile HEADERSFILE]
               [--outfile OUTFILE]
 
@@ -42,6 +42,8 @@ To Save the Output result to a File. If not then It will print to stdout in JSON
 1. Without Saving the Output
 ```bash
 python3 app.py --username riyagogoi
+```
+```json
 {
 	"username": "riyagogoi", 
 	"description": null, 
@@ -63,9 +65,14 @@ python3 app.py --username riyagogoi
 ```bash
 python3 app.py --username riyagogoi --outfile riyagogoi.json
 ```
+This will save the JSON output to `riyagogoi.json` instead of printing it to the console.
+
 3. Using a Custom Headers File
 ```bash
-python3 app.py --username riyagogoi --headersFile headers.json # You can also add this --outfile riyagogoi.json
+python3 app.py --username riyagogoi --headersFile headers.json # You can also add --outfile riyagogoi.json to save the output
+```
+If `--outfile` is not specified, the output will be printed to standard output:
+```json
 {
   "username": "riyagogoi",
   "description": null,
@@ -82,5 +89,4 @@ python3 app.py --username riyagogoi --headersFile headers.json # You can also ad
     }
   ]
 }
-
 ```
